@@ -1,6 +1,8 @@
 from django.db import models
 from django.conf import settings
 
+from profiles.models import Keep, Remove
+
 
 class Post(models.Model):
     user = models.ForeignKey(settings.AUTH_USER_MODEL)
@@ -13,9 +15,11 @@ class Post(models.Model):
     image = models.ImageField(
         upload_to='%Y/%m/%d', null=True, blank=True
     )
-
-    #게시물의 시간제한을 위한 DurationField
+    # 게시물의 시간제한을 위한 DurationField
     time_limit = models.DurationField()
+    # keep, remove는 하나의 post에는 한번만 줄 수 있으므로 1:1관계
+    keep_cnt = models.OneToOneField(Keep)
+    remove_cnt = models.OneToOneField(Remove)
 
 
 class Comment(models.Model):
