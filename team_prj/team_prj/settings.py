@@ -39,6 +39,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'profiles',
     'random_board',
+    'bootstrap3',
 ]
 
 MIDDLEWARE_CLASSES = [

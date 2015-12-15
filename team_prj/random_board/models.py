@@ -16,10 +16,25 @@ class Post(models.Model):
         upload_to='%Y/%m/%d', null=True, blank=True
     )
     # 게시물의 시간제한을 위한 DurationField
-    time_limit = models.DurationField()
+    time_limit = models.DateTimeField()
     # keep, remove는 하나의 post에는 한번만 줄 수 있으므로 1:1관계
     keep_cnt = models.OneToOneField(Keep)
     remove_cnt = models.OneToOneField(Remove)
+
+    '''
+    author=권용현
+    comment=post를 랜덤하게 뽑아주는 함수
+    * 뽑을 때 고려해야 할 내용들 -> keep과 remove의 수량에 따른 확률 변환
+    '''
+    def rand_generate_post(self):
+        pass
+    '''
+    author=권용현
+    comment=keep되어진 post만 뽑아주는 함수
+    * 뽑을 때 고려해야 할 내용들 -> keep과 remove의 수량에 따른 확률 변환
+    '''
+    def filtered_post(self):
+        pass
 
 
 class Comment(models.Model):

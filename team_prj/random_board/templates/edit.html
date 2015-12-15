@@ -1,0 +1,30 @@
+{% load bootstrap3 %}
+
+{% if post %}
+<h3>{{ post.title }} 고치기</h3>
+{% endif %}
+<form method="POST" action="" class="form-horizontal">
+	{% csrf_token %}
+	<div class="form-group form-group-sm">
+		<label class="col-sm-2 control-label">글 갈래</label>
+		<div class="col-sm-10">
+		<select name="category" class="form-control input-sm">
+		{% for category in categories %}
+			<option value="{{ category.pk }}" 
+			{% if post.category.pk == category.pk %}selected{% endif %}>{{ category.name }}</option>
+		{% endfor %}
+		</selected>
+		</div>
+	</div>	
+	<p>
+		<input type="text" name="title" value="{{ post.title }}" class="form-controll" placeholder = "글 제목"/>
+	</p>
+	<p>
+		<textarea name="content" class="form-controll" row="10">{{ post.content }}</textarea>
+	</p>
+	
+	<p>
+		{% bootstrap_button "저장" button_type="submit" button_class="btn_primary" %}
+	</p>
+</form>
+

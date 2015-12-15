@@ -1,0 +1,35 @@
+{% extends 'layout.html' %}
+{% load bootstrap3 %}
+
+{% block body %}
+	{% for post in posts %}
+	<div class="panel-default col-xs-10 col-md-8 col-lg-8 col-xs-offset-1 col-md-offset-2 col-lg-offset-2"> 
+		<div class="panel-heading">
+			<h3 class = "post_title" align="left">
+				<a href="{% url 'gbs:view_post' post.pk %}">{{ post.title }}</a>
+			</h3>
+		</div>
+		<div class="panel-body row" style="word-wrap:break-word">
+			<div class="created_date" align="right">
+				{{post.created_at}}
+			</div>
+			<div>
+				{{ post.content }}
+			</div>
+		</div>
+		
+		{% comment %}			
+		<div>
+			
+			<p>{{ post.tags.name }}</p>
+				<p><span>글 갈래 : </span>{{ post.category.name }}</p>
+				<p><span>작성일시 : </span>{{ post.created_at }}</p>
+		</div>
+		{% endcomment %}
+	</div>
+	
+	{% empty %}
+		<p>글이 하나도 없습니다.</p>
+	{% endfor %}
+
+{% endblock %}

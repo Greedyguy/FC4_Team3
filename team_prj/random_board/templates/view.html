@@ -1,0 +1,29 @@
+{% extends 'layout.html' %}
+
+{% block page_title %}글 보기 : {{ post.title }}{% endblock %}
+
+{% block body %}
+	<div class="container">
+		<div class="post_container">
+			<h3 class="post_title">{{ post.title }}</h3>
+			{% if post.image %}
+			<p><img src="{{post.image.url}}"/></p>
+			{% else %}
+			<p>이미지 없는 글.</p>
+			{% endif %}
+			<div class ="post_content">{{ post.content }}</div>
+				<p><span>글 갈래</span>{{ post.category.name }}</p>
+				<p><span>작성일시</span>{{ post.created_at }}</p>
+			</div>
+		</div>
+		{% with comments=post.comment_set.all %}
+			{% include 'comment_list.html' %}
+		{% endwith %}
+		<div class="container">
+			<p>
+				<a href="{% url 'rpost:edit_post' post.pk %}">글 수정</a>
+				<a href="{% url 'rpost:delete_post' post.pk %}">글 삭제</a>
+			</p>
+		</div>
+	</div>
+{% endblock %}
