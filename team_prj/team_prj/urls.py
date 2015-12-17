@@ -20,9 +20,21 @@ from django.contrib import admin
 from random_board.urls import urlpatterns as rpost_url
 from django.views.generic import TemplateView
 
+from django.contrib.auth.views import login as django_login
+from django.contrib.auth.views import logout as django_logout
+
+
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
     url(r'^rpost/', include(rpost_url, namespace='rpost')),
+    url(
+        r'^login/$', django_login,
+        {'template_name': 'login.html'}, name="login_url"
+    ),
+    url(
+        r'^logout/$', django_logout,
+        {'next_page': '/login/'}, name="logout_url"
+    ),
     url(
         r'^signup/$', 'profiles.views.signup', name='signup'
     ),
