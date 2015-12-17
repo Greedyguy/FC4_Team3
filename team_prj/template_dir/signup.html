@@ -1,0 +1,14 @@
+{% extends 'layout.html' %}
+
+{% block title %}회원가입{% endblock %}
+
+{% block content %}
+
+<form id="signup" method="post" action="{% url 'signup' %}">
+    {% csrf_token %}
+    {{ userform.as_p }}
+
+<input type="submit" value="회원가입" />
+</form>
+
+{% endblock %}

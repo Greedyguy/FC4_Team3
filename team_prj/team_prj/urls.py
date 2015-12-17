@@ -18,9 +18,16 @@ from django.conf.urls import include, url
 from django.contrib import admin
 
 from random_board.urls import urlpatterns as rpost_url
-
+from django.views.generic import TemplateView
 
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
     url(r'^rpost/', include(rpost_url, namespace='rpost')),
+    url(
+        r'^signup/$', 'profiles.views.signup', name='signup'
+    ),
+    url(
+        r'^signup_ok/$',
+        TemplateView.as_view(template_name='signup_ok.html'),
+        name='signup_ok'),
 ]
