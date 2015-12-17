@@ -1,8 +1,10 @@
 from django.shortcuts import render
 from django.shortcuts import get_object_or_404
+from django.shortcuts import redirect
 
 from .models import Post
 from .models import Category
+from .models import Comment
 
 
 def list_posts(request):
@@ -49,7 +51,14 @@ def edit_post(request, pk):
 
 
 def delete_post(request, pk):
-    pass
+    post = get_object_or_404(Post, pk=pk)
+    if request.method == 'POST':
+        post.delete()
+        return redirect('rpost:list_post')
+
+    return render(request, 'delete.html', {
+        'post': post,
+    })
 
 
 def view_post(request, pk):
@@ -62,4 +71,9 @@ def view_post(request, pk):
 
 
 def create_comment(request, pk):
-    pass
+    comment = Comment()
+    comment.content = request.POST['comment_writer']
+    comment.post_id = pk
+    comment.save()
+
+    return redirect('rpost:view_post', pk=pk)
