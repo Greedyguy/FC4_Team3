@@ -13,5 +13,4 @@ urlpatterns = [
     url(r'^posts/create/$', create_post, name='create_post'),
     url(r'^posts/(?P<pk>[0-9]+)/edit/$', edit_post, name='edit_post'),
     url(r'^posts/(?P<pk>[0-9]+)/delete/$', delete_post, name='delete_post'),
-
 ]
